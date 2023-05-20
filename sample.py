@@ -1,15 +1,5 @@
 import pandas as pd
-print('hi') 
-print('hello')
 
+pd_alc = pd.read_csv(r"C:\Users\Admin\Desktop\Python\all-data\data\alcohol-consumption\drinks.csv")
+print(pd_alc)
 
-
-print('new line added in 17th linev1v17')
-
-print('new line added in 19th line1v2')
-
-
-
-print('this line to be overwritten 12v3')
-
-print('this too 15v4')
