@@ -107,16 +107,60 @@ Name: count, dtype: int64"""
 
 #data cleansing with Pandas
 list_of_countries = (
-    {'Country Name':'China','ISO Code':'CN','Country Population':1435555},
-    {'Country Name':'India','ISO Code':'IND','Country Population':135555},
-    {'Country Name':'New Zealand','ISO Code':'NZ','Country Population':323433},
-    {'Country Name':'United States','ISO Code':'USA','Country Population':3000000},
-    {'Country Name':'Australia','ISO Code':'AUS','Country Population':3500000},
-    {'Country Name':'China','ISO Code':'CN','Country Population':1435555},
+    {'Country Name':'China','ISO Code':'CN','Country Population':'1435555 (1B)'},
+    {'Country Name':'India','ISO Code':'IND','Country Population':'135555 (1.1B)'},
+    {'Country Name':'New Zealand','ISO Code':'NZ','Country Population':'323433 (0.3B)'},
+    {'Country Name':'United States','ISO Code':'USA','Country Population':'30,00000 (0.2B)'},
+    {'Country Name':'Australia','ISO Code':'AUS','Country Population':'3500000 (0.35B)'},
+    {'Country Name':'China','ISO Code':'CN','Country Population':'1435555 (1B)'},
 )
 
 df_countries = pd.DataFrame(list_of_countries)
 print(df_countries)
+
+#split columns
+df_countries[['population','populationB']] = df_countries['Country Population'].str.split(' ',expand=True)
+#When using expand=True , the split elements will expand out into separate columns
+print(df_countries)
+"""
+    Country Name ISO Code Country Population population populationB
+0          China       CN       1435555 (1B)    1435555        (1B)
+1          India      IND      135555 (1.1B)     135555      (1.1B)
+2    New Zealand       NZ      323433 (0.3B)     323433      (0.3B)
+3  United States      USA     3000000 (0.2B)    3000000      (0.2B)
+4      Australia      AUS    3500000 (0.35B)    3500000     (0.35B)
+5          China       CN       1435555 (1B)    1435555        (1B)"""
+
+# Remove extra characters and commas in newly created columns
+df_countries['population'] = df_countries['population'].str.replace('(\D+)','',regex=True)
+df_countries['populationB'] = df_countries['populationB'].str.replace('(\D+)','',regex=True)
+print(df_countries.info())
+
+#change datatype of pandas column
+print(df_countries)
+
+
+#edit a value in pandas dataframe
+#update ISO Code = 'CNA' from df_countries where 'ISO Code' = 'CN'  
+df_countries.loc[df_countries['ISO Code']=='CN','ISO Code'] = 'CNA'
+
+df_countries.drop('Country Population',axis=1,inplace=True)
+#df_countries.drop(5,axis=0,inplace=True)
+
+#remove all duplicates in one go
+
+df_countries.drop_duplicates(inplace=True)
+print(df_countries)
+
+df_countries.rename(columns={'Country Name':'country_name'},inplace=True)
+
+
+print(df_countries)
+
+############################################
+#join multiple data sets
+
+
 
 
 
