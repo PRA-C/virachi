@@ -160,6 +160,58 @@ print(df_countries)
 ############################################
 #join multiple data sets
 
+df_fifa_wc_winners = pd.DataFrame({'year':[1999,2003,2007,2011,2014,2019],
+                                   'winner':['Australia','England','South Africa','New Zealand','New Zealand','France'],
+                                   'host_country':['Russia','Brazil','South Africa','Germany','Korea','Japan']})
+
+print(df_fifa_wc_winners)
+
+df_rugby_wc_winners = pd.DataFrame({'year':[1999,2003,2007,2011,2014,2019],
+                                   'winner':['England','USA','Russia','Brazil','New Zealand','France'],
+                                   'host_country':['USA','Mexico','South Africa','Germany','Korea','Australia'],
+                                   'venue':['Millenium Stadium','Telstra Stadium','R Stadium','Eden garden','CS stadium','CP stadium'],
+                                   'attendance':[12345,70123,15466,34533,23476,98712]})
+
+#concat based on the common columns
+
+df_teams = pd.concat([df_fifa_wc_winners[['year','winner','host_country']],
+                     df_rugby_wc_winners[['year','winner','host_country']]])
+
+print(df_teams)
+
+"""
+0  1999     Australia        Russia
+1  2003       England        Brazil
+2  2007  South Africa  South Africa
+3  2011   New Zealand       Germany
+4  2014   New Zealand         Korea
+5  2019        France         Japan
+1  2003       England        Brazil
+2  2007  South Africa  South Africa
+3  2011   New Zealand       Germany
+4  2014   New Zealand         Korea
+5  2019        France         Japan
+0  1999       England           USA
+1  2003           USA        Mexico
+2  2007        Russia  South Africa
+3  2011        Brazil       Germany
+4  2014   New Zealand         Korea
+5  2019        France     Australia
+"""
+
+# how to identify which rows belongs to which dataset
+
+#use keys
+
+df_teams = pd.concat([df_fifa_wc_winners[['year','winner','host_country']],
+                     df_rugby_wc_winners[['year','winner','host_country']]],
+                     keys = ['soccer','rugby'])
+                     
+
+print(df_teams)
+
+
+
 
 
 
