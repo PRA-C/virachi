@@ -210,23 +210,23 @@ df_teams = pd.concat([df_fifa_wc_winners[['year','winner','host_country']],
 
 print(df_teams)
 
+# df merge 
 
+df_departments = pd.DataFrame(
+    {'department_id':['D1','D2','D3','D4'],
+    'department_name':['IT','Sales','HR','R&D'],
+    'department_location':['Location_1','Location_1','Location_2','Location_2']}
+)
 
+df_employees = pd.DataFrame(
+    {
+        'employee_name':['Micheal','Alice','Max','Janet','Ali'],
+        'salary':[100,200,300,400,500],
+        'department_id':['D1','D1','D2','D3','D6']
 
+    }
+)
 
-
-
-
-
-
-
-#data frame is mutable or immutable
-#new_row = pd_alc.head(2)
-#print(type(new_row)) #DataFrame datatype
-#print(list(new_row))
-#app_row = list(new_row)
-#app_row[1] = 'Kailasa'
-#print('modified new row')
-#print(app_row)
-#read the shape of pandas dataframe
+print(df_employees)
+print(df_departments)
 
